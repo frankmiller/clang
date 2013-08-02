@@ -5441,6 +5441,60 @@ TEST_F(FormatTest, AllmanBraceBreaking) {
                "}\n"
                "}",
                BreakBeforeBrace);
+
+  verifyFormat("void f()\n"
+               "{\n"
+               "  if (true)\n"
+               "  {\n"
+               "    a();\n"
+               "  }\n"
+               "  else if (false)\n"
+               "  {\n"
+               "    b();\n"
+               "  }\n"
+               "  else\n"
+               "  {\n"
+               "    c();\n"
+               "  }\n"
+               "}\n",
+               BreakBeforeBrace);
+
+  verifyFormat("void f()\n"
+               "{\n"
+               "  for (int i = 0; i < 10; ++i)\n"
+               "  {\n"
+               "    a();\n"
+               "  }\n"
+               "  while (false)\n"
+               "  {\n"
+               "    b();\n"
+               "  }\n"
+               "  do\n"
+               "  {\n"
+               "    c();\n"
+               "  } while (false)\n"
+               "}\n",
+               BreakBeforeBrace);
+
+  verifyFormat("void f(int a)\n"
+               "{\n"
+               "  switch (a)\n"
+               "  {\n"
+               "  case 0:\n"
+               "    break;\n"
+               "  case 1:\n"
+               "  {\n"
+               "    break;\n"
+               "  }\n"
+               "  case 2:\n"
+               "  {\n"
+               "  }\n"
+               "  break;\n"
+               "  default:\n"
+               "    break;\n"
+               "  }\n"
+               "}\n",
+               BreakBeforeBrace);
 }
 
 bool allStylesEqual(ArrayRef<FormatStyle> Styles) {
